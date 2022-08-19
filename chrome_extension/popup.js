@@ -3,6 +3,8 @@ let chkAudio = document.getElementById("chkAudio");
 let chkVideo = document.getElementById("chkVideo");
 let chkSub = document.getElementById("chkSub");
 
+let SERVERIP = "http://192.168.1.121:8908"
+
 // When the button is clicked, inject make a new TAB, this is basically a GET
 // call that bypasses CORS
 btnDownload.addEventListener("click", async () => {
@@ -12,7 +14,7 @@ btnDownload.addEventListener("click", async () => {
         let video_id = active_url_data.searchParams.get("v");        
         if (video_id !== null)
         {
-            let qrurl = "http://192.168.1.57:8908/download?v=" + video_id;
+            let qrurl = SERVERIP + "/download?v=" + video_id;
             if (chkSub.checked) {
                 qrurl = qrurl + "&" + "s=1";
             } else {
@@ -35,7 +37,7 @@ btnDownload.addEventListener("click", async () => {
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     // Close the tabs we open after they load
-    if (tab.url.indexOf('http://192.168.1.57:8908') != -1 && changeInfo.status == 'complete') {
+    if (tab.url.indexOf(SERVERIP) != -1 && changeInfo.status == 'complete') {
         chrome.tabs.remove(tabId);
     }
 });
