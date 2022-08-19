@@ -28,7 +28,7 @@ class ConversionOperation:
         """
         Returns (input video, should output video, should output audio)
         """
-        video_path = os.path.abspath(os.path.join(DOWNLOADS, self.original_fname)).replace("/", "\\")
+        video_path = os.path.abspath(os.path.join(DOWNLOADS, self.original_fname))
         spl = self.original_fname.split("_")
         prefix = spl[0]
         if os.path.isfile(video_path):
@@ -60,8 +60,8 @@ class ConversionOperation:
         noext_basename = "_".join(noext_basename.split("_")[1:])
         video_basename = noext_basename + ".mp4"
         audio_basename = noext_basename + ".mp3"
-        video_full = os.path.join(OUTPUT, video_basename).replace("/","\\")
-        audio_full = os.path.join(OUTPUT, audio_basename).replace("/","\\")
+        video_full = os.path.join(OUTPUT, video_basename)
+        audio_full = os.path.join(OUTPUT, audio_basename)
 
         return (None if not video else video_full, None if not audio else audio_full)
 
